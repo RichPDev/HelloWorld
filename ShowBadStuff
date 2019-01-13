@@ -18,21 +18,14 @@ RunAgain:
             ctr2 = ctr2 + 1
         End If
     Next qdf
-    If ctr > 0 Then GoTo RunAgain
-    
-    Debug.Print ctr2
-    
+    If ctr > 0 Then GoTo RunAgai
+    Debug.Print ctr
     ctr2 = 0
-    
 End Function
 
 
 Public Function ShowBadTables()
-    Dim db As DAO.Database
-    Dim tdefs As DAO.TableDefs
-    Dim tdf As DAO.TableDef
-    Dim strtdefName As String
-    Dim ctr As Integer
+    Dim db As DAO.Database,tdefs As DAO.TableDefs,tdf As DAO.TableDef,strtdefName As String,ctr As Integer
 
     Set db = CurrentDb
     Set tdefs = db.TableDefs
