@@ -1,0 +1,51 @@
+Public Function ShowBadQrys()
+    Dim db As DAO.Database
+    Dim qdefs As DAO.QueryDefs
+    Dim qdf As DAO.QueryDef
+    Dim ctr As Integer
+    Static ctr2 As Integer
+
+    Set db = CurrentDb
+    Set qdefs = db.QueryDefs
+     
+RunAgain:
+    ctr = 0
+    For Each qdf In db.QueryDefs
+        If Left(qdf.Name, 1) = "~" Then
+            Debug.Print qdf.Name
+            db.QueryDefs.Delete qdf.Name
+            ctr = ctr + 1
+            ctr2 = ctr2 + 1
+        End If
+    Next qdf
+    If ctr > 0 Then GoTo RunAgain
+    
+    Debug.Print ctr2
+    
+    ctr2 = 0
+    
+End Function
+
+
+Public Function ShowBadTables()
+    Dim db As DAO.Database
+    Dim tdefs As DAO.TableDefs
+    Dim tdf As DAO.TableDef
+    Dim strtdefName As String
+    Dim ctr As Integer
+
+    Set db = CurrentDb
+    Set tdefs = db.TableDefs
+    
+    For Each tdf In db.TableDefs
+        If Left(tdf.Name, 1) = "~" Then
+            strtdefName = tdf.Name
+            Debug.Print strtdefName
+            db.TableDefs.Delete strtdefName
+            Debug.Print strtdefName & " deleted!"
+            ctr = ctr + 1
+        End If
+    Next tdf
+'Debug.Print ctr
+
+End Function
